@@ -1,0 +1,33 @@
+[build]
+  functions = "netlify/functions"  # Directory where Netlify functions are located
+
+# Redirects to route API calls to the appropriate functions
+[[redirects]]
+  from = "/api/search"
+  to = "/.netlify/functions/search"  # Assuming you have a search function for the general search
+  status = 200
+
+[[redirects]]
+  from = "/api/search/query"
+  to = "/.netlify/functions/search"  # Assuming this function handles the query as well
+  status = 200
+
+[[redirects]]
+  from = "/api/send-email"
+  to = "/.netlify/functions/sendEmail"  # Route to your sendEmail function
+  status = 200
+
+# Specify any environment variables needed for the build process
+[build.environment]
+  EMAIL_USER = "tempaddmin123@gmail.com"   # Change to your email
+  EMAIL_PASS = "lrq pttw jssq uued"     # Change to your email password or app password
+  MONGO_URI  = "mongodb+srv://helpin:jwFpph81NrxnS6eW@cluster0.7ivea.mongodb.net/test?retryWrites=true&w=majority"           # Change to your MongoDB connection URI
+
+# Specify the publish directory for the frontend (if applicable)
+[publish]
+  publish = "path/to/your/frontend/build"  # Specify the path to your frontend build directory
+  command = "npm run build"                 # Command to build your frontend
+
+# If you're using any plugins
+[[plugins]]
+  package = "@netlify/plugin-functions-install-core"
